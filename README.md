@@ -1,4 +1,4 @@
-# Stock Scanner
+# Stock Scanner Dashboard
   This project is visualizing the stocks filtered out by the scanner.
   - Stocks in HKEX
   - Sample on specific date
