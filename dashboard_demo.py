@@ -167,16 +167,13 @@ def generatingCharts(market_data, code, dashboard):
     dfstock = market_data[market_data.code == code]
     amp = dashboard.loc[code, 'Amp']
     name = dashboard.loc[code, 'Name']
-    spread = str(int(dashboard.loc[code, 'Spread']))
-    vol_ratio = str(dashboard.loc[code, 'VolRatio'])
-    print(code + ' ' + str(vol_ratio))
     chart_title = code + ' ' + name + ' ' + amp
     title_color = 'white'
-    if dashboard.loc[code, 'Spread'] >= 1:
+    if dashboard.loc[code, 'Amp'] >= '1%':
         title_color = '#3D9970'
-    elif dashboard.loc[code, 'Spread'] <= -1:
+    elif dashboard.loc[code, 'Amp'] <= '-1%':
         title_color = '#FF4136'
-    elif -1 < dashboard.loc[code, 'Spread'] < 1:
+    elif '-1%' < dashboard.loc[code, 'Amp'] < '1%':
         title_color = 'white'
     fig = candlestick_chart(dfstock, chart_title, title_color)
     return fig
@@ -185,7 +182,6 @@ def generatingCharts(market_data, code, dashboard):
 def candlestick_chart(dfstock, chart_title, title_color):
     ohlc_stock = dfstock['price'].resample('1Min').ohlc()
     ohlc_stock.reset_index(inplace=True)
-    # ohlc_stock['time'] = ohlc_stock.index.apply(lambda _: dt.datetime.strptime(_, '%H:%M:%S'))
     ohlc_stock['time'] = pd.to_datetime(ohlc_stock['DateTime']).dt.strftime('%H:%M:%S')
     ohlc_stock.dropna(inplace=True)
     ohlc_stock.drop('DateTime', axis=1, inplace=True)
@@ -232,8 +228,6 @@ def candlestick_chart(dfstock, chart_title, title_color):
             # "titlefont": {"color": "darkgray"},
         },
     )
-    # fig["layout"].update(paper_bgcolor="#21252C", plot_bgcolor="#21252C")
-    # margin={"t": 50, "l": 50, "b": 50, "r": 25},
     return fig
 
 
