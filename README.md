@@ -3,7 +3,7 @@
   - Stocks in HKEX
   - Sample on specific date
   - Implemented by plotly
-  - Candlestick charts are included last 40 mins
+  - Candlestick charts are included last 40 mins, handling tick data converted to ohlc data
   - Update the stocks and charts every 5 seconds in real-time operation
   - This scanner is adopted a kind of momentum trading
 
